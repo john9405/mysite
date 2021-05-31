@@ -1,4 +1,4 @@
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
 # Create your models here.
@@ -6,16 +6,7 @@ from django.db import models
 
 class Post(models.Model):
     title = models.CharField(max_length=500)
-    content = RichTextField(
-        config_name='forum-post',
+    content = RichTextUploadingField()
 
-        # CKEDITOR.config.extraPlugins:
-        extra_plugins=['someplugin'],
-
-        # CKEDITOR.plugins.addExternal(...)
-        external_plugin_resources=[(
-            'someplugin',
-            '/static/.../path-to-someplugin/',
-            'plugin.js',
-        )],
-    )
+    def __str__(self):
+        return self.title
